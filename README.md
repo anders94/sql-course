@@ -96,6 +96,8 @@ Down in the "Data Output" pane, you should see all your people listed out. If yo
 a PostgreSQL database up and running and you have created a database with a table and some data and you have 
 SELECTed stuff out of it! Well done.
 
+Extra Fun
+---------
 Before we finish though, let's have the database do something with our data. Try these statements one by one and
 watch what we get as results:
 
