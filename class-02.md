@@ -72,3 +72,61 @@ is a great way to have something simple and unique to refer to that row of data.
 assigning a unique number to each player on a soccer field. You don't have to remember all the names,
 and there may be two players names Anne on the field. Calling them by number is more clear.
 
+A New Table
+-----------
+Let's create a new table to demonstrate how these unique numbers can be used. Let's say our people have
+bank accounts.
+
+```
+CREATE TABLE accounts (
+  id        SERIAL,
+  people_id INTEGER NOT NULL,
+  balance   DECIMAL NOT NULL
+);
+```
+
+There are a few things to notice in this new table. Firstly, each account we create also has a SERIAL id 
+number. We might call this the "account number" if we were a bank. Just like our "people" table, this 
+will start at 1 and incrament each time we INSERT data into this table.
+
+Secondly, that people_id column refers to the id column in the people table. Got that? Yeah, this is where
+it gets interesting. The people_id column says who owns this account. We're going to put the "id" from the 
+people table in there to show who owns this account. Let's put some data in there.
+
+```
+INSERT INTO accounts (people_id, balance) VALUES (1, 100.00);
+INSERT INTO accounts (people_id, balance) VALUES (2, 250.00);
+INSERT INTO accounts (people_id, balance) VALUES (3, 100.00);
+INSERT INTO accounts (people_id, balance) VALUES (3, 500.00);
+INSERT INTO accounts (people_id, balance) VALUES (3, 390.00);
+INSERT INTO accounts (people_id, balance) VALUES (4, 800.00);
+```
+
+Looking at this data here, we should have Elizabeth with $100 and Jane with $250. But look closely at what
+person number 3 has. That's Darcy. Not only does he have $100 in one account, but two others with $500 and
+$390 respectively. He's got some coin. And of course our friend Bingley has a single account with $800 in it.
+
+Let's do some simple selects on this table. Let's find out how much money they all have together.
+
+```
+SELECT SUM(balance) FROM accounts;
+```
+
+See that? Now what about Darcy? How much does he have across all his accouts?
+
+```
+SELECT SUM(balance) FROM accounts WHERE people_id = 3;
+```
+
+Boom!
+
+But we have to know that people_id 3 here stands for Darcy, right? Let's make it a little more clear by tying
+the two tables together.
+
+```
+SELECT p.first_name, p.last_name, a.balance
+FROM accounts a
+  JOIN people p ON a.people_id = p.id;
+```
+
+Whoa, whoa! That gives us what we want, but what is all that JOIN stuff?
