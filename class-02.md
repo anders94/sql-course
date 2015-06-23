@@ -120,7 +120,10 @@ SELECT SUM(balance) FROM accounts WHERE people_id = 3;
 
 Boom!
 
-But we have to know that people_id 3 here stands for Darcy, right? Let's make it a little more clear by tying
+Joining Tables
+--------------
+
+We have to know that people_id 3 here stands for Darcy, right? Let's make it a little more clear by tying
 the two tables together.
 
 ```
@@ -130,3 +133,23 @@ FROM accounts a
 ```
 
 Whoa, whoa! That gives us what we want, but what is all that JOIN stuff?
+
+Let's unpack that a bit.
+
+```
+FROM accounts a
+```
+
+Here we're naming th accounts table "a" as a shorthand. That way we can SELECT a.balance in the first line.
+
+```
+JOIN people p ON a.people_id = p.id
+```
+
+We're going to bring in the people table (naming it "p" as a shorthand) and tie it to the account table by
+matching the account table's "people_id" column with the numbers in the people table's "id" column. So
+when we find a 3 in the account table's "people_id" column, we're going to go look it up in the people table's
+"id" column and find the "Darcy" row.
+
+Once we get the two tables together, we can ask for whatever rows we want by name using our shorthand "a" or
+"p" labels. When we say "p.first_name", we get the person't first name.
