@@ -153,3 +153,38 @@ when we find a 3 in the account table's "people_id" column, we're going to go lo
 
 Once we get the two tables together, we can ask for whatever rows we want by name using our shorthand "a" or
 "p" labels. When we say "p.first_name", we get the person't first name.
+
+Cool, eh? JOINing gets quite interesting and lies at the heart of the term "Relational Database". The fact 
+that a column in one table can hold an "id" from another table means we can see how some data relates to
+other data.
+
+In this case, our good friend Darcy owns more than one account. You will notice that his name showed up three
+times in our results even though there is only one row containing "Darcy" in the "people" table. How did that 
+happen? We ended up JOINing him over three times because his number is in the accounts table three times.
+
+This is a good way to not keep many copies of the same thing in the database. The benifit here is if Darcy were
+to change his name, we wouldn't have to update it in three different places. If we update his name in the 
+"people" table and do the select again, we would see the new name on all three accounts. That might not seem 
+like a big thing now, but when you have millions of records and thousands of relationships, it becomes a major
+advantage.
+
+The Big Ask
+-----------
+Now that you've seen how we can show all the accounts and people, I'm going to ask you to modify that SQL to 
+just show me all the accounts owned by Darcy.
+
+Hint: You will start with the same SQL and constrain the output to just Darcy by adding a WHERE clause.
+
+```
+SELECT p.first_name, p.last_name, a.balance
+FROM accounts a
+  JOIN people p ON a.people_id = p.id;
+```
+
+There is more than one way to skin this cat. Think about how we specified a particular person in the previous 
+class.
+
+Next Time
+---------
+Next time we're going to import a sizable dataset and start teasing out some interesting facts about movies. 
+Stay tuned!
