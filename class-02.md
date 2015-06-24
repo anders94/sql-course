@@ -182,7 +182,7 @@ FROM accounts a
 ```
 
 There is more than one way to skin this cat. Think about how we specified a particular person in the previous 
-class.
+section.
 
 Next Time
 ---------
