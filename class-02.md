@@ -19,7 +19,7 @@ CREATE TABLE people (
 
 It reads fairly well from the top if you look closely. "CREATE TABLE people" followed by a bunch
 of stuff in parentheses. We're going to create a table called "people" defined by the stuff in the
-parentheses. What is in the parentheses is a comma seperated list of names (that we made up) and
+parentheses. What is in the parentheses is a comma separated list of names (that we made up) and
 data types. (that are pre-defined by the database) It isn't required, but by convention we are 
 typing all the pre-defined stuff in capitals and the made up stuff in lower case. This makes it 
 easier to scan through some text and instantly know, "that's SQL" or "we made that up."
@@ -38,14 +38,14 @@ different data types that can be used for columns. We'll take a brief look at th
 
 Database defined terms, like CREATE or TIMESTAMP, can't be used as column names. You can imagine how 
 the computer might not be able to figure out if you were intending one of these words as a name or
-not if they weren't "reerved" by the database. These are called "reserved words". It is generally
+not if they weren't "reserved" by the database. These are called "reserved words". It is generally
 very easy to stay away from them though so it isn't a big loss.
 
 Data Types
 ----------
 Columns in your table can hold data of many types. For example, you can add numbers, words (using 
 VARCHAR for example) or dates. (as in TIMESTAMP) There are many other types that hold less common
-things, like UUID for universally unique identifiers, INET for Inernet addresses and networks, BOOLEAN
+things, like UUID for universally unique identifiers, INET for Internet addresses and networks, BOOLEAN
 for "yes / no" type information and even GEOGRAPHY for latitude / longitude type information. We're
 going to skip the complicated stuff and focus on the common stuff.
 
@@ -87,7 +87,7 @@ CREATE TABLE accounts (
 
 There are a few things to notice in this new table. Firstly, each account we create also has a SERIAL id 
 number. We might call this the "account number" if we were a bank. Just like our "people" table, this 
-will start at 1 and incrament each time we INSERT data into this table.
+will start at 1 and increment each time we INSERT data into this table.
 
 Secondly, that people_id column refers to the id column in the people table. Got that? Yeah, this is where
 it gets interesting. The people_id column says who owns this account. We're going to put the "id" from the 
@@ -140,7 +140,7 @@ Let's unpack that a bit.
 FROM accounts a
 ```
 
-Here we're naming th accounts table "a" as a shorthand. That way we can SELECT a.balance in the first line.
+Here we're naming the accounts table "a" as a shorthand. That way we can SELECT a.balance in the first line.
 
 ```
 JOIN people p ON a.people_id = p.id
@@ -162,7 +162,7 @@ In this case, our good friend Darcy owns more than one account. You will notice 
 times in our results even though there is only one row containing "Darcy" in the "people" table. How did that 
 happen? We ended up JOINing him over three times because his number is in the accounts table three times.
 
-This is a good way to not keep many copies of the same thing in the database. The benifit here is if Darcy were
+This is a good way to not keep many copies of the same thing in the database. The benefit here is if Darcy were
 to change his name, we wouldn't have to update it in three different places. If we update his name in the 
 "people" table and do the select again, we would see the new name on all three accounts. That might not seem 
 like a big thing now, but when you have millions of records and thousands of relationships, it becomes a major
