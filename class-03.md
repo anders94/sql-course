@@ -172,12 +172,12 @@ Remember back in the last lesson we were JOINing tables together? We were sewing
 another using some common column. Well, in this case, our common column between the ratings 
 table and the movies table is the movieId column.
 
-Notice the movieId column is named slightly differently than we named things in the previous
-two lessons. We might have instead called the movieId column in the movies table simply "id". And
-in the ratings table, we would have called the column "movie_id". These are all simply conventions.
-You can call a column in a table just about anything. It just helps us when we call them something
-descriptive and you will see a wide range of common practices in doing this. I have my conventions
-but these tables were made by the MovieLens project - we just imported them.
+  Notice the movieId column is named slightly differently than we named things in the previous
+  two lessons. We might have instead called the movieId column in the movies table simply "id". And
+  in the ratings table, we would have called the column "movie_id". These are all simply conventions.
+  You can call a column in a table just about anything. It just helps us when we call them something
+  descriptive and you will see a wide range of common practices in doing this. I have my conventions
+  but these tables were made by the MovieLens project - we just imported them.
 
 Back to the matter at hand. Let's use the movieId columns to tie the two tables together so we
 can show the name of the movie as well.
