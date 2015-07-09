@@ -29,9 +29,10 @@ screen top open the SQL editor we have been using. You should get a nice empty e
 Now comes the tricky part. We're going to execute a SQL script that creates a few tables and 
 dumps an enormous pile of data into them. All in all, this SQL is 94 megabytes of data!
 
-Right click and select "Save as..." on this [MovieLens](https://raw.githubusercontent.com/anders94/sql-course/master/datasets/movielens.sql) 
-dataset and save it somewhere on your computer. Don't just view this in your browser - it is
-not a small file! Save it - it will be easier this way!
+* [MovieLens](https://raw.githubusercontent.com/anders94/sql-course/master/datasets/movielens.sql)
+
+Right click and select "Save as..." on the above dataset and save it somewhere on your computer. 
+Don't just view this in your browser - it is not a small file! Save it - it will be easier this way!
 
 Let's go back to our blank SQL editor window. Select "File: Open..." and go find that 
 "movielens.sql" file you just downloaded. It is a huge file - it will take time to load up in 
@@ -110,13 +111,73 @@ INSERT INTO movies (movieid, title, genres) VALUES (4, 'Waiting to Exhale (1995)
 
 Now for the coup de grâce. Let's hit that little green play button. This will take a while.
 The system is going to create all the tables above and then INSERT all the data into them.
-If all goes well, you should be left without an error in the window below.
+If all goes well, you should be left without an error in the window below. This might take
+anywhere from a few seconds to many minutes depending on the speed of your computer.
 
 The next step is very important. So you don't accidentially re-run the same queries and mess
 everything up, select all the text in the SQL window and delete it out of there! You want to 
 be left with a nice blank SQL window before we move forward.
 
-More to come...
----------------
+How Cool is This?
+-----------------
 
-Still working on this!
+With a movie ratings database, we should be able to figure out how cool some movie is, right?
+Let's start by finding an interesting movie. Let's search through all the movies and find the
+ones with "Sabrina" in the title.
+
+```
+SELECT *
+FROM movies
+WHERE title LIKE '%Sabrina%';
+```
+
+You should get two of them. The first Sabrina was released in 1954 with Humphrey Bogart and Audrey 
+Hepburn and then there was a re-make in 1995 with Harrison Ford and Julia Ormond. Lets note that 
+the 1954 version is movieId 915 and the 1995 version is movieId 7.
+
+So let's go through the ratings table and find all the ratings for the 1954 version of Sabrina:
+
+```
+SELECT *
+FROM ratings
+WHERE movieId = 915;
+```
+
+We get a pile of ratings by a bunch of users for just this movie. Interesting, right? Scroll through 
+that a bit and see the diversity of opinion.
+
+But what might be more interesting is to know the average rating, right? So rather than SELECTing 
+everything from that table, let's use the AVG() function to SELECT just the average.
+
+```
+SELECT AVG(rating)
+FROM ratings
+WHERE movieId = 915;
+```
+
+Now we're cooking with gas! Much more intersting, right?
+
+What's the average rating of the 1995 version of the film? Better? Worse?
+
+```
+SELECT AVG(rating)
+FROM ratings
+WHERE movieId = 915;
+```
+
+So says popular opinion, although I would disagree. If you can get by the 1990's style clothing
+and glasses, (in particular) it is a stunning film.
+
+Remember back in the last lesson we were JOINing tables together? We were sewing one table to 
+another using some common column. Well, in this case, our common column between the ratings 
+table and the movies table is the movieId column.
+
+Notice the movieId column is named slightly differently than we named things in the previous
+two lessons. We might have instead called the movieId column in the movies table simply "id". And
+in the ratings table, we would have called the column "movie_id". These are all simply conventions.
+You can call a column in a table just about anything. It just helps us when we call them something
+descriptive and you will see a wide range of common practices in doing this. I have my conventions
+but these tables were made by the MovieLens project - we just imported them.
+
+Back to the matter at hand. Let's use the movieId columns to tie the two tables together so we
+can show the name of the movie as well.
