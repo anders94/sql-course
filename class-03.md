@@ -162,7 +162,7 @@ What's the average rating of the 1995 version of the film? Better? Worse?
 ```
 SELECT AVG(rating)
 FROM ratings
-WHERE movieId = 915;
+WHERE movieId = 7;
 ```
 
 So says popular opinion, although I would disagree. If you can get by the 1990's style clothing
