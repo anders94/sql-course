@@ -3,8 +3,8 @@ Class 5
 
 Last time...
 
-Speed
------
+Indexing for Speed
+------------------
 Let's see how fast we can select a movie by exact title.
 
 ```
