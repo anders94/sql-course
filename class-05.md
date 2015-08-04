@@ -5,12 +5,15 @@ Last time...
 
 Indexing for Speed
 ------------------
-Let's see how fast we can select a movie by exact title.
-
+You can see how fast queries run by looking at the bottom of the query window. (If you happen to be using the 
+CLI version of the PostgreSQL client, you would have to turn timing on like this)
 ```
 movielens=# \timing
 Timing is on.
+```
 
+OK, let's see how fast it is to select a movie by exact title:
+```
 movielens=# select * from movies where title = 'Serpico (1973)';
  movieid |     title      |   genres    
 ---------+----------------+-------------
